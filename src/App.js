@@ -8,7 +8,9 @@ import { Layout } from 'antd';
 
 import DashboardPage from './pages/DashboardPage/DashboardPage';
 import PostPage from './pages/PostPage/PostPage';
-import AuthorPage from './pages/AuthorPage/AuthorPage';
+import SingleAuthorPage from './pages/SingleAuthorPage/SingleAuthorPage';
+import AuthorPostsPage from './pages/AuthorPostsPage/AuthorPostsPage';
+import AuthorsPage from './pages/AuthorsPage/AuthorsPage';
 import Navigation from './components/Navigation/Navigation';
 
 const App = () => {
@@ -17,12 +19,20 @@ const App = () => {
     <Router>
       <Layout className="layout">
         <Navigation />
-        <Content className="AppContent" style={{ padding: '0 50px' }}>
+        <Content className="AppContent">
           <Switch>
             <Route path="/" exact component={DashboardPage} />
             <Route path="/dashboard" component={DashboardPage} />
             <Route path="/post/:postId" component={PostPage} />
-            <Route path="/profile/:userId" component={AuthorPage} />
+            <Route
+              path="/profile/:userId"
+              component={SingleAuthorPage}
+            />
+            <Route path="/authors" component={AuthorsPage} />
+            <Route
+              path="/posts/:userName/:userId"
+              component={AuthorPostsPage}
+            />
           </Switch>
         </Content>
       </Layout>

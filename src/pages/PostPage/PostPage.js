@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card } from 'antd';
+import { Card, List, Divider } from 'antd';
 import { useParams, Link } from 'react-router-dom';
 import { LeftOutlined } from '@ant-design/icons';
 import useFetch from '../../hooks/useFetch';
@@ -13,6 +13,9 @@ const PostPage = () => {
   const [isLoading, setIsLoading] = useState([]);
   const { data } = useFetch(
     `https://jsonplaceholder.typicode.com/posts/${postId}`,
+  );
+  const comments = useFetch(
+    `https://jsonplaceholder.typicode.com/comments?postId=${postId}`,
   );
 
   useEffect(() => {
@@ -47,8 +50,25 @@ const PostPage = () => {
               Author:{' '}
               <Link to={`/profile/${author.id}`}>{author.name}</Link>
             </p>
-
             <p>{data.body}</p>
+            <Divider />
+            {comments.data && (
+              <>
+                <b>Comments({comments.data.length}):</b>
+                <List
+                  itemLayout="horizontal"
+                  dataSource={comments.data}
+                  renderItem={(comment) => (
+                    <List.Item>
+                      <List.Item.Meta
+                        title={`${comment.name} (${comment.email})`}
+                        description={comment.body}
+                      />
+                    </List.Item>
+                  )}
+                />
+              </>
+            )}
           </Card>
         </>
       )}

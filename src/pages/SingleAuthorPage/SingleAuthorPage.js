@@ -5,15 +5,16 @@ import { RightOutlined } from '@ant-design/icons';
 import useFetch from '../../hooks/useFetch';
 import Loader from '../../components/Loader/Loader';
 
-import './AuthorPage.scss';
+import './SingleAuthorPage.scss';
 
-const AuthorPage = () => {
+const SingleAuthorPage = () => {
   const { userId } = useParams();
   const { data, isLoading } = useFetch(
     `https://jsonplaceholder.typicode.com/users/${userId}`,
   );
 
   const {
+    id,
     name,
     username,
     email,
@@ -31,7 +32,7 @@ const AuthorPage = () => {
       address.zipcode
     ) {
       return (
-        <p className="PostPage__card--author">
+        <p className="SingleAuthorPage__card--details">
           Address: {address.suite}, {address.street} street,{' '}
           {address.city}, {address.zipcode}
         </p>
@@ -39,27 +40,32 @@ const AuthorPage = () => {
     }
     return null;
   };
+
   return (
-    <div className="AuthorPage">
+    <div className="SingleAuthorPage">
       {isLoading ? (
         <Loader />
       ) : (
         <>
-          <Link to="/dashboard">
+          <Link to={`/posts/${name}/${id}`}>
             See all posts of {name}
             <RightOutlined />
           </Link>
-          <Card title={name} className="PostPage__card">
-            <p className="PostPage__card--author">
+          <Card title={name} className="SingleAuthorPage__card">
+            <p className="SingleAuthorPage__card--details">
               Username: {username}
             </p>
-            <p className="PostPage__card--author">email: {email}</p>
-            <p className="PostPage__card--author">Phone: {phone}</p>
-            <p className="PostPage__card--author">
+            <p className="SingleAuthorPage__card--details">
+              email: {email}
+            </p>
+            <p className="SingleAuthorPage__card--details">
+              Phone: {phone}
+            </p>
+            <p className="SingleAuthorPage__card--details">
               Website: {website}
             </p>
             {renderAddress()}
-            <p className="PostPage__card--author">
+            <p className="SingleAuthorPage__card--details">
               Company: {company && company.name}
             </p>
           </Card>
@@ -69,4 +75,4 @@ const AuthorPage = () => {
   );
 };
 
-export default AuthorPage;
+export default SingleAuthorPage;
