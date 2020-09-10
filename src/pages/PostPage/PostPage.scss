@@ -1,0 +1,14 @@
+.PostPage {
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: 16px 0;
+
+  &__card {
+    margin-top: 10px !important;
+
+    &--author {
+      font-style: italic;
+      color: #808080
+    }
+  }
+}
