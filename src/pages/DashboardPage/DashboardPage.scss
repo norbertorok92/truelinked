@@ -1,0 +1,11 @@
+.DashboardPage {
+  flex-basis: 0;
+  flex-grow: 1;
+  margin: 16px 0;
+
+  &__table {
+    tbody tr {
+      cursor: pointer;
+    }
+  }
+}
