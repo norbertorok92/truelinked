@@ -1,6 +1,10 @@
 # truelinked
 
-### `yarn start`
+### `nvm use` or in case you don't have nvm use use node version 12
+
+### `npm install`
+
+### `npm start`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
